@@ -15,3 +15,5 @@ Instalar React Bootstrap: pnpm install react-bootstrap bootstrap
 Usar iconos de flaticons: https://flaticon.com/
 
 Deploy en Netlify: https://www.netlify.com/
+
+Sitio: https://pokedex-react-ts-25.netlify.app/

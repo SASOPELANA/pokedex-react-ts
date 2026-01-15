@@ -1,73 +1,62 @@
-# React + TypeScript + Vite
+# Pokedex React TypeScript
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este proyecto es una aplicación de Pokedex simple creada con React, TypeScript y Vite. Muestra una lista de Pokémon y permite filtrarlos por nombre o ID.
 
-Currently, two official plugins are available:
+## ✨ Características
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Muestra una lista de Pokémon con sus estadísticas.
+- Filtra Pokémon por nombre o ID.
+- Diseño responsivo utilizando React Bootstrap.
+- Carga de datos desde una API pública.
 
-## React Compiler
+## 🛠️ Tecnologías Utilizadas
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- [React](https://reactjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Vite](https://vitejs.dev/)
+- [React Router](https://reactrouter.com/)
+- [React Bootstrap](https://react-bootstrap.github.io/)
 
-## Expanding the ESLint configuration
+## 🚀 Instalación y Uso
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Sigue estos pasos para levantar el proyecto en tu entorno local.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Prerrequisitos
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- [Node.js](https://nodejs.org/) (versión 18 o superior)
+- [Git](https://git-scm.com/)
+- [pnpm](https://pnpm.io/) (puedes instalarlo con `npm install -g pnpm`)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Pasos
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+1.  **Clona el repositorio:**
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+    ```sh
+    git clone https://github.com/tu-usuario/pokedex-react-typescripts.git
+    cd pokedex-react-typescripts
+    ```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+2.  **Instala las dependencias:**
+
+    ```sh
+    pnpm install
+    ```
+
+3.  **Inicia el servidor de desarrollo:**
+    ```sh
+    pnpm run dev
+    ```
+    La aplicación estará disponible en `http://localhost:5173`.
+
+## 📜 Scripts Disponibles
+
+- `pnpm dev`: Inicia la aplicación en modo de desarrollo.
+- `pnpm build`: Compila la aplicación para producción.
+- `pnpm lint`: Ejecuta el linter de ESLint para revisar el código.
+- `pnpm preview`: Sirve la build de producción localmente.
+
+## 🌐 Despliegue
+
+La aplicación está desplegada en Netlify y puedes verla en vivo aquí:
+
+[https://pokedex-react-ts-25.netlify.app/](https://pokedex-react-ts-25.netlify.app/)

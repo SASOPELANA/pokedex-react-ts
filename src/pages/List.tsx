@@ -1,22 +1,11 @@
-{
-  /* TODO: importar librerias de bootstrap */
-}
 import "bootstrap/dist/css/bootstrap.min.css";
-import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import ListGroup from "react-bootstrap/ListGroup";
 import Figure from "react-bootstrap/Figure";
 
-{
-  /* TODO: importar librerias de react */
-}
 import { useState, useEffect } from "react";
 import getPokemons from "../controllers/getPokemon.controller";
 import type { Pokemon } from "../models/pokemon.m";
 
-{
-  /* TODO: importar imagenes */
-}
 import CorazonIcon from "../assets/icons/corazon-verde-icon.png";
 import AtaqueIcon from "../assets/icons/espadas-icon.png";
 import DefenseIcon from "../assets/icons/defensa-icon.png";
@@ -69,64 +58,66 @@ const List = () => {
 
             {filterResult?.slice(0, 300).map((pokemon: Pokemon) => (
               <Card
-                className="mx-auto"
+                className="mx-auto pokemon-card"
                 style={{ width: "18rem" }}
                 key={pokemon.id}
               >
-                <Card.Header>
-                  {" "}
-                  <b>Tipo: </b> {pokemon.type?.join(" - ")}
-                </Card.Header>
+                <div className="pokemon-card__header">
+                  <div className="pokemon-card__types">
+                    {pokemon.type?.map((t) => (
+                      <span key={t} className={`pokemon-card__type pokemon-type--${t.toLowerCase()}`}>
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
                 <Card.Img
                   variant="top"
-                  height="100"
-                  width="80"
+                  height="120"
+                  width="120"
                   src={pokemon.imggif}
-                  className="d-block mx-auto w-50"
+                  className="d-block mx-auto w-50 pokemon-card__image"
                 />
                 <Card.Body>
-                  <Card.Title className="text-center">
-                    <strong>
-                      {pokemon.id} - {pokemon.name}
-                    </strong>
+                  <Card.Title className="text-center pokemon-card__title">
+                    <span className="pokemon-card__id">#{pokemon.id}</span>
+                    <span className="pokemon-card__name">{pokemon.name}</span>
                   </Card.Title>
 
-                  <ListGroup variant="flush">
-                    <ListGroup.Item>
+                  <div className="pokemon-card__stats-grid">
+                    <div className="pokemon-card__stat-item">
                       <Figure.Image width={16} height={16} src={CorazonIcon} />
-                      <b> HP: </b> {pokemon.hp}
-                    </ListGroup.Item>
-                    <ListGroup.Item>
+                      <span>HP: {pokemon.hp}</span>
+                    </div>
+                    <div className="pokemon-card__stat-item">
                       <Figure.Image width={16} height={16} src={AtaqueIcon} />
-                      <b> Ataque: </b> {pokemon.attack}
-                    </ListGroup.Item>
-                    <ListGroup.Item>
+                      <span>Ataque: {pokemon.attack}</span>
+                    </div>
+                    <div className="pokemon-card__stat-item">
                       <Figure.Image width={16} height={16} src={DefenseIcon} />
-                      <b> Defensa: </b> {pokemon.defense}
-                    </ListGroup.Item>
-                    <ListGroup.Item>
+                      <span>Defensa: {pokemon.defense}</span>
+                    </div>
+                    <div className="pokemon-card__stat-item">
                       <Figure.Image
                         width={16}
                         height={16}
                         src={AtaqueEspecialIcon}
                       />
-                      <b> Ataque Especial: </b> {pokemon.sp_attack}
-                    </ListGroup.Item>
-                    <ListGroup.Item>
+                      <span>Ataque Esp: {pokemon.sp_attack}</span>
+                    </div>
+                    <div className="pokemon-card__stat-item">
                       <Figure.Image
                         width={16}
                         height={16}
                         src={DefensaEspecialIcon}
                       />
-                      <b> Defensa Especial: </b> {pokemon.sp_defense}
-                    </ListGroup.Item>
-                    <ListGroup.Item>
+                      <span>Defensa Esp: {pokemon.sp_defense}</span>
+                    </div>
+                    <div className="pokemon-card__stat-item">
                       <Figure.Image width={18} height={18} src={SpeedIcon} />
-                      <b> Velocidad: </b> {pokemon.speed}
-                    </ListGroup.Item>
-                  </ListGroup>
-
-                  <Button variant="primary">Go somewhere</Button>
+                      <span>Velocidad: {pokemon.speed}</span>
+                    </div>
+                  </div>
                 </Card.Body>
               </Card>
             ))}
