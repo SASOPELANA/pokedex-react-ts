@@ -1,0 +1,17 @@
+Instalar Node.js, git y usar el editor de código de preferencia.
+
+Ir a la pagina de Vite: https://vitejs.dev/
+
+Crear un proyecto con Vite: pnpm create vite@latest  
+
+Instalar las dependencias: pnpm install 
+
+Iniciar el proyecto: pnpm run dev
+
+Instalar React Router: pnpm install react-router-dom
+
+Instalar React Bootstrap: pnpm install react-bootstrap bootstrap
+
+Usar iconos de flaticons: https://flaticon.com/
+
+Deploy en Netlify: https://www.netlify.com/
