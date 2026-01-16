@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import Card from "react-bootstrap/Card";
 import Figure from "react-bootstrap/Figure";
+import Pagination from "react-bootstrap/Pagination";
 
 import { useState, useEffect } from "react";
 import getPokemons from "../controllers/getPokemon.controller";
@@ -12,10 +13,13 @@ import DefenseIcon from "../assets/icons/defensa-icon.png";
 import AtaqueEspecialIcon from "../assets/icons/att-especial-icon.png";
 import DefensaEspecialIcon from "../assets/icons/defensa-especial-icon.png";
 import SpeedIcon from "../assets/icons/speed-icon.png";
+import "./../styles/Pagination.css";
 
 const List = () => {
   const [pokemons, setPokemon] = useState<Pokemon[]>([]);
   const [query, setQuery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const pokemonsPerPage = 12;
 
   useEffect(() => {
     const getAllPokemons = async () => {
@@ -26,15 +30,32 @@ const List = () => {
     getAllPokemons();
   }, []);
 
-  const filerPokemons = pokemons?.slice(0, 300).filter((pokemon) => {
+  const filerPokemons = pokemons?.slice(0, 500).filter((pokemon) => {
     return pokemon.name.toLowerCase().match(query.toLowerCase());
   });
 
-  const filterId = pokemons?.slice(0, 300).filter((pokemon) => {
+  const filterId = pokemons?.slice(0, 500).filter((pokemon) => {
     return pokemon.id.toString().match(query.toLowerCase());
   });
 
   const filterResult = [...filerPokemons, ...filterId];
+
+  const indexOfLastPokemon = currentPage * pokemonsPerPage;
+  const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage;
+  const currentPokemons = filterResult.slice(
+    indexOfFirstPokemon,
+    indexOfLastPokemon,
+  );
+
+  const totalPages = Math.ceil(filterResult.length / pokemonsPerPage);
+
+  const goToPrevPage = () => {
+    setCurrentPage((prev) => Math.max(1, prev - 1));
+  };
+
+  const goToNextPage = () => {
+    setCurrentPage((prev) => Math.min(totalPages, prev + 1));
+  };
 
   return (
     <div>
@@ -44,7 +65,10 @@ const List = () => {
         <input
           value={query}
           placeholder="Filtrar por nombre o id"
-          onChange={(event) => setQuery(event.target.value.trim())}
+          onChange={(event) => {
+            setQuery(event.target.value.trim());
+            setCurrentPage(1);
+          }}
           type="text"
         />
       </header>
@@ -56,7 +80,7 @@ const List = () => {
               // foreach de tres cartas
             }
 
-            {filterResult?.slice(0, 300).map((pokemon: Pokemon) => (
+            {currentPokemons.map((pokemon: Pokemon) => (
               <Card
                 className="mx-auto pokemon-card"
                 style={{ width: "18rem" }}
@@ -65,7 +89,10 @@ const List = () => {
                 <div className="pokemon-card__header">
                   <div className="pokemon-card__types">
                     {pokemon.type?.map((t) => (
-                      <span key={t} className={`pokemon-card__type pokemon-type--${t.toLowerCase()}`}>
+                      <span
+                        key={t}
+                        className={`pokemon-card__type pokemon-type--${t.toLowerCase()}`}
+                      >
                         {t}
                       </span>
                     ))}
@@ -122,6 +149,19 @@ const List = () => {
               </Card>
             ))}
           </div>
+          {filterResult.length > pokemonsPerPage && (
+            <Pagination className="justify-content-center mt-4 custom-pagination">
+              <Pagination.Prev
+                onClick={goToPrevPage}
+                disabled={currentPage === 1}
+              />
+              <Pagination.Item active>{currentPage}</Pagination.Item>
+              <Pagination.Next
+                onClick={goToNextPage}
+                disabled={currentPage === totalPages}
+              />
+            </Pagination>
+          )}
         </div>
       </div>
     </div>
